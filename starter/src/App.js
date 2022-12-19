@@ -1,35 +1,36 @@
 import "./App.css";
 import ListOfBooks from "./ListOfBooks.js";
+import React, {Component} from 'react';
 
-import { useState } from "react";
+class App extends Component {
 
+  constructor(){
+      super();
+      this.state={
+        showSearchPage: false,
+        currentlyReading: {},
+        wantToRead: {},
+        read: {}
+      }
+      this.showSearchPageHandler = this.showSearchPageHandler.bind(this);
 
-function updateStateOfCurrentlyReading() {
-}
+  }
 
-function updateStateOfWantToRead() {
-}
+  showSearchPageHandler(changeState) {
+    this.setState({
+      showSearchPage: changeState
+    });  
+  }
 
-function updateStateOfRead() {
-}
-
-function App() {
-  const [showSearchPage, setShowSearchpage] = useState(false);
-
-  let [currentlyReading, setCurrentlyReading] = useState({})
-  let [wantToRead, setWantToRead] = useState({})
-  let [read, setRead] = useState({})
-
-
-
-  return (
+  render(){
+    return (
     <div className="app">
-      {showSearchPage ? (
+      {this.state.showSearchPage ? (
         <div className="search-books">
           <div className="search-books-bar">
             <a
               className="close-search"
-              onClick={() => setShowSearchpage(!showSearchPage)}
+              onClick={() => this.showSearchPageHandler(false)}
             >
               Close
             </a>
@@ -55,7 +56,7 @@ function App() {
                 <h2 className="bookshelf-title">Currently Reading</h2>
                 <div className="bookshelf-books">
                   <ol className="books-grid">
-                    <ListOfBooks currentlyReading={currentlyReading} /> 
+                    <ListOfBooks currentlyReading={this.state.currentlyReading} /> 
                   </ol>
                 </div>
               </div>
@@ -78,12 +79,13 @@ function App() {
             </div>
           </div>
           <div className="open-search">
-            <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>
+            <a onClick={() => this.showSearchPageHandler(true)}>Add a book</a>
           </div>
         </div>
       )}
     </div>
-  );
-}
+    )
+  }
 
+}
 export default App;
