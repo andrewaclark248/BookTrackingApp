@@ -1,6 +1,8 @@
 import "./App.css";
 import ListOfBooks from "./ListOfBooks.js";
 import React, {Component} from 'react';
+import SearchPage from "./SearchPage.js";
+
 
 class App extends Component {
 
@@ -13,7 +15,6 @@ class App extends Component {
         read: {}
       }
       this.showSearchPageHandler = this.showSearchPageHandler.bind(this);
-
   }
 
   showSearchPageHandler(changeState) {
@@ -26,25 +27,8 @@ class App extends Component {
     return (
     <div className="app">
       {this.state.showSearchPage ? (
-        <div className="search-books">
-          <div className="search-books-bar">
-            <a
-              className="close-search"
-              onClick={() => this.showSearchPageHandler(false)}
-            >
-              Close
-            </a>
-            <div className="search-books-input-wrapper">
-              <input
-                type="text"
-                placeholder="Search by title, author, or ISBN"
-              />
-            </div>
-          </div>
-          <div className="search-books-results">
-            <ol className="books-grid"></ol>
-          </div>
-        </div>
+        <SearchPage showSearchPageHandler={this.showSearchPageHandler} />
+
       ) : (
         <div className="list-books">
           <div className="list-books-title">
