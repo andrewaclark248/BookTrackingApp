@@ -15,6 +15,7 @@ class App extends Component {
         read: {}
       }
       this.showSearchPageHandler = this.showSearchPageHandler.bind(this);
+      this.updateWantToReadList = this.updateWantToReadList(this);
   }
 
   showSearchPageHandler(changeState) {
@@ -23,11 +24,16 @@ class App extends Component {
     });  
   }
 
+  updateWantToReadList() {
+    console.log("want to read method executed")
+  }
+
   render(){
     return (
     <div className="app">
       {this.state.showSearchPage ? (
-        <SearchPage showSearchPageHandler={this.showSearchPageHandler} />
+        <SearchPage showSearchPageHandler={this.showSearchPageHandler} 
+                    updateWantToReadList={this.updateWantToReadList} />
 
       ) : (
         <div className="list-books">

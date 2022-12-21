@@ -8,11 +8,6 @@ function SearchPage(props) {
     const [books, setBooks] = useState(0);
 
     useEffect(() => {
-        //async function fetchMyAPI() {
-        //  let response = await fetch('api/data')
-        //  response = await response.json()
-        //  dataSet(response)
-        //}
         async function getAllBooks() {
             let result = await getAll();
             setBooks(result);
@@ -44,7 +39,7 @@ function SearchPage(props) {
       <ol className="books-grid">
         {Object.keys(allBooks).map((key,index) => (
 
-          <Book key={index} book={allBooks[key]}/>
+          <Book key={index} book={allBooks[key]} {...props}/>
         ))}  
       </ol>
     </div>
