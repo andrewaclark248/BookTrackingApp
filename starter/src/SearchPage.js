@@ -1,7 +1,6 @@
 import { getAll } from "./BooksAPI.js";
 import { useState, useEffect } from 'react';
 import Book from './Book.js';
-import Welcome from './Welcome.js';
 
 
 
@@ -43,8 +42,9 @@ function SearchPage(props) {
     </div>
     <div className="search-books-results">
       <ol className="books-grid">
-        {Object.keys(allBooks).map((name,index) => (  
-          <Book key={index}/>
+        {Object.keys(allBooks).map((key,index) => (
+
+          <Book key={index} book={allBooks[key]}/>
         ))}  
       </ol>
     </div>
