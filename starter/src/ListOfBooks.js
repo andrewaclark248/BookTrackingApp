@@ -11,7 +11,7 @@ import Book from './Book.js';
             //allBooks.push(result)
             setBooks(books => [...books, result])
         }
-        props.currentlyReading?.map((bookId) => {
+        props.books?.map((bookId) => {
             getAllBooks(bookId)
             //console.log("hahah", bookId)
         })

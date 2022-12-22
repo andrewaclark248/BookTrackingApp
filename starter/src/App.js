@@ -16,7 +16,7 @@ class App extends Component {
         read: []
       }
       this.showSearchPageHandler = this.showSearchPageHandler.bind(this);
-      this.updateWantToReadList = this.updateWantToReadList.bind(this);
+      this.updateLists = this.updateLists.bind(this);
   }
 
   showSearchPageHandler(changeState) {
@@ -25,7 +25,7 @@ class App extends Component {
     });  
   }
 
-  async updateWantToReadList(bookId, list) {
+  async updateLists(bookId, list) {
     var book = await get(bookId);
     if (list == "currentlyReading"){
       this.setState({ currentlyReading: [...this.state.currentlyReading, bookId] })
@@ -40,7 +40,7 @@ class App extends Component {
     return (
     <div className="app">
       {this.state.showSearchPage ? (
-        <SearchPage showSearchPageHandler={this.showSearchPageHandler}  updateWantToReadList={this.updateWantToReadList} />
+        <SearchPage showSearchPageHandler={this.showSearchPageHandler}  updateLists={this.updateLists} />
 
       ) : (
         <div className="list-books">
@@ -54,10 +54,7 @@ class App extends Component {
                 <div className="bookshelf-books">
                   <ol className="books-grid">
                     <ListOfBooks 
-                      currentlyReading={this.state.currentlyReading}
-                      wantToRead={this.state.wantToRead}
-                      read={this.state.read}
-                      typeOfList="currentlyReading"
+                      books={this.state.currentlyReading}
                      /> 
                   </ol>
                 </div>
@@ -66,7 +63,9 @@ class App extends Component {
                 <h2 className="bookshelf-title">Want to Read</h2>
                 <div className="bookshelf-books">
                   <ol className="books-grid">
-                    <ListOfBooks/> 
+                    <ListOfBooks
+                      books={this.state.wantToRead}
+                    /> 
                   </ol>
                 </div>
               </div>
@@ -74,7 +73,9 @@ class App extends Component {
                 <h2 className="bookshelf-title">Read</h2>
                 <div className="bookshelf-books">
                   <ol className="books-grid">
-                    <ListOfBooks/> 
+                    <ListOfBooks
+                      books={this.state.read}
+                    /> 
                   </ol>
                 </div>
               </div>
