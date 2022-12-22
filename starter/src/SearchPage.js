@@ -17,7 +17,6 @@ function SearchPage(props) {
       }, [])
     
     let allBooks = JSON.parse(JSON.stringify(books))
-    const myArray = ['Jack', 'Mary', 'John', 'Krish', 'Navin'];  
 
     return (
     <div className="search-books">
@@ -38,8 +37,7 @@ function SearchPage(props) {
     <div className="search-books-results">
       <ol className="books-grid">
         {Object.keys(allBooks).map((key,index) => (
-
-          <Book key={index} book={allBooks[key]} {...props}/>
+            <Book key={index} book={allBooks[key]} {...props}/>
         ))}  
       </ol>
     </div>

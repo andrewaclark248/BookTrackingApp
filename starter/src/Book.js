@@ -1,5 +1,4 @@
 function Book(props) {
-    console.log(props)
     let imageUrl = props.book.imageLinks.thumbnail.toString();
     let url = 'url('+imageUrl+')'
     let bookName = props.book.title;
@@ -18,7 +17,7 @@ function Book(props) {
                 }}
                 ></div>
                 <div className="book-shelf-changer">
-                <select onChange={() => {console.log("changed")}}>
+                <select onChange={(event) => {props.updateWantToReadList(props.book.id, event.target.value)}}>
                     <option value="none" disabled>
                     Move to...
                     </option>
