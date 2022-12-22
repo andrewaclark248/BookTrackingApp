@@ -10,14 +10,13 @@ class App extends Component {
   constructor(){
       super();
       this.state={
-        showSearchPage: false
-
+        showSearchPage: false,
+        currentlyReading: [],
+        wantToRead: [],
+        read: []
       }
       this.showSearchPageHandler = this.showSearchPageHandler.bind(this);
       this.updateWantToReadList = this.updateWantToReadList.bind(this);
-      this.currentlyReading = [];
-      this.wantToRead = [];
-      this.read = [];
   }
 
   showSearchPageHandler(changeState) {
@@ -28,15 +27,13 @@ class App extends Component {
 
   async updateWantToReadList(bookId, list) {
     var book = await get(bookId);
-    console.log(book.id)
     if (list == "currentlyReading"){
-      this.currentlyReading.push(bookId)
+      this.setState({ currentlyReading: [...this.state.currentlyReading, bookId] })
     } else if (list == "wantToRead") {
-      this.wantToRead.push(bookId)
+      this.setState({ wantToRead: [...this.state.wantToRead, bookId] })
     } else if (list == "read") {
-      this.read.push(bookId)
+      this.setState({ read: [...this.state.read, bookId] })
     }
-    console.log(this.currentlyReading)
   }
 
   render(){
@@ -56,7 +53,12 @@ class App extends Component {
                 <h2 className="bookshelf-title">Currently Reading</h2>
                 <div className="bookshelf-books">
                   <ol className="books-grid">
-                    <ListOfBooks currentlyReading={this.state.currentlyReading} /> 
+                    <ListOfBooks 
+                      currentlyReading={this.state.currentlyReading}
+                      wantToRead={this.state.wantToRead}
+                      read={this.state.read}
+                      typeOfList="currentlyReading"
+                     /> 
                   </ol>
                 </div>
               </div>

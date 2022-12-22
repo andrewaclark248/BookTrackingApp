@@ -1,4 +1,7 @@
 function Book(props) {
+    if (props.someProp == "someProp") {
+        console.log("went here")
+    }
     let imageUrl = props.book.imageLinks.thumbnail.toString();
     let url = 'url('+imageUrl+')'
     let bookName = props.book.title;
