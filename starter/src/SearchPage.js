@@ -37,7 +37,7 @@ function SearchPage(props) {
     <div className="search-books-results">
       <ol className="books-grid">
         {Object.keys(allBooks).map((key,index) => (
-            <Book key={index} book={allBooks[key]} {...props}/>
+            <Book key={allBooks[key].id} book={allBooks[key]} {...props} isUpdate={false}/>
         ))}  
       </ol>
     </div>

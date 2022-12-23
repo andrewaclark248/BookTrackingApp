@@ -20,7 +20,13 @@ function Book(props) {
                 }}
                 ></div>
                 <div className="book-shelf-changer">
-                <select onChange={(event) => {props.updateLists(props.book.id, event.target.value)}}>
+                <select onChange={(event) => {
+                    if (props.isUpdate) {
+                        props.moveListOnShelf(props.book.id, props.currentList, event.target.value)
+                    } else {
+                        props.updateLists(props.book.id, event.target.value)
+                    }
+                }}>
                     <option value="none" disabled>
                     Move to...
                     </option>

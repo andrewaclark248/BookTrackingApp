@@ -2,35 +2,57 @@ import { get } from "./BooksAPI.js";
 import { useState, useEffect } from 'react';
 import Book from './Book.js';
 
- function ListOfBooks(props) {
-    const [allBooks, setBooks] = useState([]);
+function ListOfBooks(props) {
+    var testBooks = []
+    let [allBooks, setBooks] = useState([]);
+    if (props.currentList == "wantToRead") {
+        console.log("some books", props.books)
+    }
     useEffect(() => {
+
         async function getAllBooks(bookId) {
             let result = await get(bookId);
-            //console.log(result)
-            //allBooks.push(result)
+            testBooks.push(result)
             setBooks(books => [...books, result])
+            //allBooks.push(result)
+            //console.log("allBooks",allBooks)
         }
         props.books?.map((bookId) => {
             getAllBooks(bookId)
+            console.log("went here when ahahahah")
+
             //console.log("hahah", bookId)
         })
       }, [])
+    //props.books?.map((bookId) => {
+    //    var result = getBooks(bookId)
+    //    allBooks.push("asdfsdf")
+    //})
+    //console.log("after function call")
 
-    console.log(allBooks)
+
+    if (props.currentList == "wantToRead") { //props.isUpdate && 
+        console.log("is want to read list on update")
+        console.log(testBooks)
+    }
+
     return (
+        
     <ol className="books-grid">
-        {allBooks?.map((book) => {
-                /**get(bookId).then((data) => {
-                    console.log("data", data) 
-                }).catch(()=>console.log("error"))**/
-                //console.log("after promise resolved")
-            return (<Book key={book.id} book={book} someProp="someProp"/> )
-
-        })
+        
+        {
+            allBooks?.map((book) => {
+                return (<Book key={book.id} book={book} {...props}/> )
+            })
         }
     </ol>
     );
+}
+
+async function getBooks(bookId) {
+    let result = await get(bookId);
+    console.log("went here")
+    return result;
 }
 
 //<Book book={data} someProp="someProp"/>
