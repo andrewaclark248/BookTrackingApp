@@ -26,49 +26,59 @@ class App extends Component {
     });  
   }
 
+
+  //new book, add to shelf
   async updateLists(bookId, list) {
     var book = await get(bookId);
     if (list == "currentlyReading"){
-      this.setState({ currentlyReading: [...this.state.currentlyReading, bookId] })
+      this.setState({ currentlyReading: [...this.state.currentlyReading, book] })
     } else if (list == "wantToRead") {
-      this.setState({ wantToRead: [...this.state.wantToRead, bookId] })
+      this.setState({ wantToRead: [...this.state.wantToRead, book] })
     } else if (list == "read") {
-      this.setState({ read: [...this.state.read, bookId] })
+      this.setState({ read: [...this.state.read, book] })
     }
   }
 
-  moveListOnShelf(bookId, currentList, newList) {
-    //delete from current list
-    //add to new list
+  //move to different shelf
+  async moveListOnShelf(bookId, currentList, newList) {
 
+
+    //remove from old list
     if (currentList == "currentlyReading"){
-      var newList = [...this.state.currentlyReading]
-      var indexOfBook = newList.indexOf(bookId)
-      newList.splice(indexOfBook, 1)
-      this.setState({ currentlyReading: newList })
+      var listWithOldObject = [...this.state.currentlyReading]
+      var updatedList = listWithOldObject.filter((el) => {
+        return el.id !== bookId;
+      });
+      this.setState({ currentlyReading: updatedList })
     } else if (currentList == "wantToRead") {
-      var newList = [...this.state.wantToRead]
-      var indexOfBook = newList.indexOf(bookId)
-      newList.splice(indexOfBook, 1)
-      this.setState({ wantToRead: newList })
+      var listWithOldObject = [...this.state.wantToRead]
+      var updatedList = listWithOldObject.filter((el) => {
+        return el.id !== bookId;
+      });
+      this.setState({ wantToRead: updatedList })
     } else if (currentList == "read") {
-      var newList = [...this.state.read]
-      var indexOfBook = newList.indexOf(bookId)
-      newList.splice(indexOfBook, 1)
-      this.setState({ read: newList })
+      var listWithOldObject = [...this.state.read]
+      var updatedList = listWithOldObject.filter((el) => {
+        return el.id !== bookId;
+      });
+      this.setState({ read: updatedList })
     }
-
+    var book = await get(bookId);
+    console.log("newlist in method = " + newList)
+    console.log("read"==newList)
+    //add to new list
     if (newList == "currentlyReading"){
       var newList = [...this.state.currentlyReading]
-      newList.push(bookId)
+      newList.push(book)
       this.setState({ read: newList })
     } else if (newList == "wantToRead") {
       var newList = [...this.state.wantToRead]
-      newList.push(bookId)
+      newList.push(book)
       this.setState({ wantToRead: newList })
     } else if (newList == "read") {
       var newList = [...this.state.read]
-      newList.push(bookId)
+      newList.push(book)
+      console.log("newList = ", newList)
       this.setState({ read: newList })
     }
 
@@ -77,7 +87,8 @@ class App extends Component {
   render(){
     //console.log("render method")
     //console.log(this.state.wantToRead)
-
+    console.log("read list")
+    console.log(this.state.read)
     return (
     <div className="app">
       {this.state.showSearchPage ? (

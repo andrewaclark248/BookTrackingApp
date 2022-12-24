@@ -3,11 +3,9 @@ import { useState, useEffect } from 'react';
 import Book from './Book.js';
 
 function ListOfBooks(props) {
-    var testBooks = []
-    let [allBooks, setBooks] = useState([]);
-    if (props.currentList == "wantToRead") {
-        console.log("some books", props.books)
-    }
+    let [allBooks, setBooks] = useState(props?.books);
+
+    /***
     useEffect(() => {
 
         async function getAllBooks(bookId) {
@@ -17,13 +15,15 @@ function ListOfBooks(props) {
             //allBooks.push(result)
             //console.log("allBooks",allBooks)
         }
+
         props.books?.map((bookId) => {
             getAllBooks(bookId)
             console.log("went here when ahahahah")
 
             //console.log("hahah", bookId)
         })
-      }, [])
+
+      }, []) */
     //props.books?.map((bookId) => {
     //    var result = getBooks(bookId)
     //    allBooks.push("asdfsdf")
@@ -32,8 +32,8 @@ function ListOfBooks(props) {
 
 
     if (props.currentList == "wantToRead") { //props.isUpdate && 
-        console.log("is want to read list on update")
-        console.log(testBooks)
+        //console.log("is want to read list on update")
+        //console.log(props.books)
     }
 
     return (
@@ -41,7 +41,7 @@ function ListOfBooks(props) {
     <ol className="books-grid">
         
         {
-            allBooks?.map((book) => {
+            props.books?.map((book) => {
                 return (<Book key={book.id} book={book} {...props}/> )
             })
         }
