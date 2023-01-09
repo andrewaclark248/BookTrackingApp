@@ -22,9 +22,11 @@ function Book(props) {
                 <div className="book-shelf-changer">
                 <select onChange={(event) => {
                     if (props.isUpdate) {
-                        props.moveListOnShelf(props.book.id, props.currentList, event.target.value)
+                        props.moveListOnShelf(props.book.id, props.currentList, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
+                        //props.moveListOnShelf(props.book.id, props.currentList, event.target.value)
                     } else {
-                        props.updateLists(props.book.id, event.target.value)
+                        props.updateLists(props.book.id, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
+                        //props.updateLists(props.book.id, event.target.value)
                     }
                 }}>
                     <option value="none" disabled>
@@ -35,7 +37,7 @@ function Book(props) {
                     </option>
                     <option value="wantToRead">Want to Read</option>
                     <option value="read">Read</option>
-                    <option value="none">None</option>
+                    <option value="none" selected>None</option>
                 </select>
                 </div>
             </div>
