@@ -11,7 +11,6 @@ export default function App2(props) {
     let [wantToRead, setWantToRead] = useState([])
     let [read, setRead] = useState([])
 
-    console.log(wantToRead)
     return (
         <div className="app">
           {showSearchPage ? (
@@ -39,7 +38,7 @@ export default function App2(props) {
                       <ol className="books-grid">
                         <ListOfBooks 
                             currentList="currentlyReading"
-                            books={wantToRead}
+                            books={currentlyReading}
                             updateLists={updateLists}
                             setCurrentlyReading={setCurrentlyReading}
                             setWantToRead={setWantToRead}
@@ -59,7 +58,7 @@ export default function App2(props) {
                       <ol className="books-grid">
                         <ListOfBooks 
                                 currentList="wantToRead"
-                                books={currentlyReading}
+                                books={wantToRead}
                                 updateLists={updateLists}
                                 setCurrentlyReading={setCurrentlyReading}
                                 setWantToRead={setWantToRead}
@@ -106,7 +105,8 @@ export default function App2(props) {
 }
 
 async function updateLists(bookId, list, setCurrentlyReading, setWantToRead, setRead, currentlyReading, wantToRead, read) {
-   console.log("want to read == " + wantToRead)
+    console.log("list === " + list)
+
     var book = await get(bookId);
     if (list == "currentlyReading"){
         currentlyReading.push(book)
@@ -125,7 +125,6 @@ async function updateLists(bookId, list, setCurrentlyReading, setWantToRead, set
   //move to different shelf
   async function moveListOnShelf(bookId, currentList, newList, setCurrentlyReading, setWantToRead, setRead, currentlyReading, wantToRead, read) {
     //setCurrentlyReading, setWantToRead, setRead
-
     //remove from old list
     if (currentList == "currentlyReading"){
       var listWithOldObject = [...currentlyReading]

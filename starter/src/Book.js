@@ -1,7 +1,4 @@
 function Book(props) {
-    if (props.someProp == "someProp") {
-        console.log("went here")
-    }
     let imageUrl = props.book.imageLinks.thumbnail.toString();
     let url = 'url('+imageUrl+')'
     let bookName = props.book.title;
@@ -37,7 +34,7 @@ function Book(props) {
                     </option>
                     <option value="wantToRead">Want to Read</option>
                     <option value="read">Read</option>
-                    <option value="none" selected>None</option>
+                    <option value="none">None</option>
                 </select>
                 </div>
             </div>
