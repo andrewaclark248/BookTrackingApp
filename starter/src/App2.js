@@ -39,7 +39,7 @@ export default function App2(props) {
                       <ol className="books-grid">
                         <ListOfBooks 
                             currentList="currentlyReading"
-                            books={currentlyReading}
+                            books={wantToRead}
                             updateLists={updateLists}
                             setCurrentlyReading={setCurrentlyReading}
                             setWantToRead={setWantToRead}
@@ -57,6 +57,19 @@ export default function App2(props) {
                     <h2 className="bookshelf-title">Want to Read</h2>
                     <div className="bookshelf-books">
                       <ol className="books-grid">
+                        <ListOfBooks 
+                                currentList="wantToRead"
+                                books={currentlyReading}
+                                updateLists={updateLists}
+                                setCurrentlyReading={setCurrentlyReading}
+                                setWantToRead={setWantToRead}
+                                setRead={setRead}
+                                isUpdate={true}
+                                moveListOnShelf={moveListOnShelf}
+                                currentlyReading={currentlyReading}
+                                wantToRead={wantToRead}
+                                read={read}
+                            /> 
                       </ol>
                     </div>
                   </div>
@@ -64,6 +77,19 @@ export default function App2(props) {
                     <h2 className="bookshelf-title">Read</h2>
                     <div className="bookshelf-books">
                       <ol className="books-grid">
+                        <ListOfBooks 
+                                currentList="read"
+                                books={read}
+                                updateLists={updateLists}
+                                setCurrentlyReading={setCurrentlyReading}
+                                setWantToRead={setWantToRead}
+                                setRead={setRead}
+                                isUpdate={true}
+                                moveListOnShelf={moveListOnShelf}
+                                currentlyReading={currentlyReading}
+                                wantToRead={wantToRead}
+                                read={read}
+                            /> 
                       </ol>
                     </div>
                   </div>
