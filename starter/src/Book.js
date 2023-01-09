@@ -1,7 +1,4 @@
 function Book(props) {
-    if (props.someProp == "someProp") {
-        console.log("went here")
-    }
     let imageUrl = props.book.imageLinks.thumbnail.toString();
     let url = 'url('+imageUrl+')'
     let bookName = props.book.title;
@@ -22,9 +19,11 @@ function Book(props) {
                 <div className="book-shelf-changer">
                 <select onChange={(event) => {
                     if (props.isUpdate) {
-                        props.moveListOnShelf(props.book.id, props.currentList, event.target.value)
+                        props.moveListOnShelf(props.book.id, props.currentList, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
+                        //props.moveListOnShelf(props.book.id, props.currentList, event.target.value)
                     } else {
-                        props.updateLists(props.book.id, event.target.value)
+                        props.updateLists(props.book.id, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
+                        //props.updateLists(props.book.id, event.target.value)
                     }
                 }}>
                     <option value="none" disabled>
