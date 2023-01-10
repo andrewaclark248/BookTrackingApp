@@ -1,8 +1,12 @@
 function Book(props) {
-    let imageUrl = props.book.imageLinks.thumbnail.toString();
+    if (props.book == undefined) {
+        return (<div></div>)
+    }
+
+    let imageUrl = props.book.imageLinks?.thumbnail?.toString();
     let url = 'url('+imageUrl+')'
     let bookName = props.book.title;
-    let authors = props.book.authors.join(" & ");
+    let authors = props.book.authors?.join(" & ");
     return (
         <li>
             <div className="book">
