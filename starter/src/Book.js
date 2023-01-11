@@ -1,6 +1,8 @@
 function Book(props) {
     var selectedValue = null;
-    if (props.selectedOptionForBook != null && props.selectedOptionForBook != undefined) {
+    if (props.currentList != undefined) {
+        selectedValue = props.currentList;
+    } else if (props.selectedOptionForBook != undefined) {
         selectedValue = props.selectedOptionForBook;
     } else {
         selectedValue = "none"
@@ -24,17 +26,18 @@ function Book(props) {
                 ></div>
                 <div className="book-shelf-changer">
                 <select value={selectedValue} onChange={(event) => { 
-                    if (props.isUpdate) {
-                        props.moveListOnShelf(props.book.id, props.currentList, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
-                        //props.moveListOnShelf(props.book.id, props.currentList, event.target.value)
-                    } else {
-                        props.updateLists(props.book.id, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
-                        //props.updateLists(props.book.id, event.target.value)
+                    if ((event.target.value != "none")) {
+                        props.moveListOnShelf(props.book.id, selectedValue, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
                     }
+
+                    //if (props.isUpdate) {
+                    //    props.moveListOnShelf(props.book.id, props.currentList, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
+                    //    //props.moveListOnShelf(props.book.id, props.currentList, event.target.value)
+                    //} else {
+                    //    props.updateLists(props.book.id, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
+                        //props.updateLists(props.book.id, event.target.value)
+                    //}
                 }}>
-                    <option value="none">
-                    Move to...
-                    </option>
                     <option value="currentlyReading">
                     Currently Reading
                     </option>

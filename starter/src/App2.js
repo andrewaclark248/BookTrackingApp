@@ -17,6 +17,7 @@ export default function App2(props) {
             <SearchPage 
                 showSearchPageHandler={setShowSearchPage} 
                 updateLists={updateLists}
+                moveListOnShelf={moveListOnShelf}
                 setCurrentlyReading={setCurrentlyReading}
                 setWantToRead={setWantToRead}
                 setRead={setRead}
@@ -124,25 +125,27 @@ async function updateLists(bookId, list, setCurrentlyReading, setWantToRead, set
   async function moveListOnShelf(bookId, currentList, newList, setCurrentlyReading, setWantToRead, setRead, currentlyReading, wantToRead, read) {
     //setCurrentlyReading, setWantToRead, setRead
     //remove from old list
-    if (currentList == "currentlyReading"){
-      var listWithOldObject = [...currentlyReading]
-      var updatedList = listWithOldObject.filter((el) => {
-        return el.id !== bookId;
-      });
-      setCurrentlyReading(updatedList)
-    } else if (currentList == "wantToRead") {
-      var listWithOldObject = [...wantToRead]
-      var updatedList = listWithOldObject.filter((el) => {
-        return el.id !== bookId;
-      });
-      setWantToRead(updatedList)
-    } else if (currentList == "read") {
-      var listWithOldObject = [...read]
-      var updatedList = listWithOldObject.filter((el) => {
-        return el.id !== bookId;
-      });
-      setRead(updatedList)
-    }
+    //skip if currentList == none 
+    console.log("current list = " + currentList)
+      if (currentList == "currentlyReading"){
+        var listWithOldObject = [...currentlyReading]
+        var updatedList = listWithOldObject.filter((el) => {
+          return el.id !== bookId;
+        });
+        setCurrentlyReading(updatedList)
+      } else if (currentList == "wantToRead") {
+        var listWithOldObject = [...wantToRead]
+        var updatedList = listWithOldObject.filter((el) => {
+          return el.id !== bookId;
+        });
+        setWantToRead(updatedList)
+      } else if (currentList == "read") {
+        var listWithOldObject = [...read]
+        var updatedList = listWithOldObject.filter((el) => {
+          return el.id !== bookId;
+        });
+        setRead(updatedList)
+      }
 
     var book = await get(bookId);
     //add to new list

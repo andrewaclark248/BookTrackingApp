@@ -49,7 +49,6 @@ async function handleSearchResult(inputValue, setBooks){
 }
 
 function bookIsOnShelf(props, currentBook) {
-  console.log(currentBook.title)
   var isInCurrentlyReadingList = null;
   var isInWantToReadList = null;
   var isInReadList = null;
@@ -74,11 +73,6 @@ function bookIsOnShelf(props, currentBook) {
   } else if (isInReadList != 0) {
     shelf = "read"
   }
-  console.log("book = " + currentBook.title)
-  console.log("isInCurrentlyReadingList = " + isInCurrentlyReadingList.length)
-  console.log("isInWantToReadList = " + isInWantToReadList.length)
-  console.log("isInReadList = " + isInReadList.length)
-  console.log("shelf = " + shelf)
   return shelf
 }
 
