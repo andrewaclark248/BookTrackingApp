@@ -7,15 +7,6 @@ import { search } from './BooksAPI.js'
 function SearchPage(props) {
     const [books, setBooks] = useState({});
 
-    /***useEffect(() => {
-        async function getAllBooks() {
-            let result = await getAll();
-            setBooks(result);
-        }
-    
-        getAllBooks()
-      }, [])***/
-    
     return (
     <div className="search-books">
     <div className="search-books-bar">
@@ -35,9 +26,13 @@ function SearchPage(props) {
     </div>
     <div className="search-books-results">
       <ol className="books-grid">
-        {books != undefined && Object.keys(books).length != 0 && Object.keys(JSON.stringify(books)).map((key,index) => (
-            <Book key={index} book={books[key]} {...props} isUpdate={false}/>
-        ))}  
+        {
+            (Object.keys(books).map((key,index) => 
+              (
+                <Book key={index} book={books[key]} {...props} isUpdate={false} isSearchPage={true} selectedOptionForBook={bookIsOnShelf(props, books[key])} />
+              )
+            ))
+        }  
       </ol>
     </div>
   </div>
@@ -52,7 +47,34 @@ async function handleSearchResult(inputValue, setBooks){
   let result = await search(inputValue, 100)
   setBooks(result)
 }
-//console.log(key, allBooks[key]);
+
+function bookIsOnShelf(props, currentBook) {
+  var isInCurrentlyReadingList = null;
+  var isInWantToReadList = null;
+  var isInReadList = null;
+
+  isInCurrentlyReadingList = props.currentlyReading.filter((book) => {
+    return book.title == currentBook.title
+  })
+
+  isInWantToReadList = props.wantToRead.filter((book) => {
+    return book.title == currentBook.title
+  })
+
+  isInReadList = props.read.filter((book) => {
+    return book.title == currentBook.title
+  })
+
+  var shelf = "none"
+  if (isInCurrentlyReadingList.length != 0) {
+      shelf = "currentlyReading"
+  } else if(isInWantToReadList.length != 0) {
+    shelf = "wantToRead"
+  } else if (isInReadList != 0) {
+    shelf = "read"
+  }
+  return shelf
+}
 
 
 export default SearchPage;
