@@ -1,6 +1,9 @@
 function Book(props) {
-    if (props.book == undefined) {
-        return (<div></div>)
+    var selectedValue = null;
+    if (props.selectedOptionForBook != null && props.selectedOptionForBook != undefined) {
+        selectedValue = props.selectedOptionForBook;
+    } else {
+        selectedValue = "none"
     }
 
     let imageUrl = props.book.imageLinks?.thumbnail?.toString();
@@ -16,12 +19,11 @@ function Book(props) {
                 style={{
                     width: 128,
                     height: 193,
-                    backgroundImage:
-                    url,
+                    backgroundImage: url,
                 }}
                 ></div>
                 <div className="book-shelf-changer">
-                <select onChange={(event) => {
+                <select value={selectedValue} onChange={(event) => { 
                     if (props.isUpdate) {
                         props.moveListOnShelf(props.book.id, props.currentList, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
                         //props.moveListOnShelf(props.book.id, props.currentList, event.target.value)
@@ -30,7 +32,7 @@ function Book(props) {
                         //props.updateLists(props.book.id, event.target.value)
                     }
                 }}>
-                    <option value="none" disabled>
+                    <option value="none">
                     Move to...
                     </option>
                     <option value="currentlyReading">

@@ -105,8 +105,6 @@ export default function App2(props) {
 }
 
 async function updateLists(bookId, list, setCurrentlyReading, setWantToRead, setRead, currentlyReading, wantToRead, read) {
-    console.log("list === " + list)
-
     var book = await get(bookId);
     if (list == "currentlyReading"){
         currentlyReading.push(book)
