@@ -29,14 +29,6 @@ function Book(props) {
                     if ((event.target.value != "none")) {
                         props.moveListOnShelf(props.book.id, selectedValue, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
                     }
-
-                    //if (props.isUpdate) {
-                    //    props.moveListOnShelf(props.book.id, props.currentList, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
-                    //    //props.moveListOnShelf(props.book.id, props.currentList, event.target.value)
-                    //} else {
-                    //    props.updateLists(props.book.id, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
-                        //props.updateLists(props.book.id, event.target.value)
-                    //}
                 }}>
                     <option value="currentlyReading">
                     Currently Reading

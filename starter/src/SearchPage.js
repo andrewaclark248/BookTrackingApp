@@ -2,40 +2,36 @@ import { getAll } from "./BooksAPI.js";
 import { useState, useEffect } from 'react';
 import Book from './Book.js';
 import { search } from './BooksAPI.js'
+import { Link } from "react-router-dom";
 
 
 function SearchPage(props) {
     const [books, setBooks] = useState({});
 
     return (
-    <div className="search-books">
-    <div className="search-books-bar">
-      <a
-        className="close-search"
-        onClick={() => props.showSearchPageHandler(false)}
-      >
-        Close
-      </a>
-      <div className="search-books-input-wrapper">
-        <input
-          type="text"
-          placeholder="Search by title, author, or ISBN"
-          onChange={(e) => { handleSearchResult(e.target.value, setBooks) }}
-        />
+      <div className="search-books">
+        <div className="search-books-bar">
+          <Link to="/" className="close-search">Close</Link>
+          <div className="search-books-input-wrapper">
+            <input
+              type="text"
+              placeholder="Search by title, author, or ISBN"
+              onChange={(e) => { handleSearchResult(e.target.value, setBooks) }}
+            />
+          </div>
+        </div>
+        <div className="search-books-results">
+          <ol className="books-grid">
+            {
+                (Object.keys(books).map((key,index) => 
+                  (
+                    <Book key={index} book={books[key]} {...props} isUpdate={false} isSearchPage={true} selectedOptionForBook={bookIsOnShelf(props, books[key])} />
+                  )
+                ))
+            }  
+          </ol>
+        </div>
       </div>
-    </div>
-    <div className="search-books-results">
-      <ol className="books-grid">
-        {
-            (Object.keys(books).map((key,index) => 
-              (
-                <Book key={index} book={books[key]} {...props} isUpdate={false} isSearchPage={true} selectedOptionForBook={bookIsOnShelf(props, books[key])} />
-              )
-            ))
-        }  
-      </ol>
-    </div>
-  </div>
   );
 }
 
