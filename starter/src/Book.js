@@ -32,7 +32,7 @@ function Book(props) {
                     if ((event.target.value != "none")) {
                         //console.log("props.book", props.book)
                         //console.log("shelf", event.target.value)
-                        updateBook(props.book, event.target.value)
+                        updateBook(props.book, event.target.value, props)
                         //props.moveListOnShelf(props.book.id, selectedValue, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
                     }
                 }}>
@@ -53,9 +53,18 @@ function Book(props) {
 
 }
 
-async function updateBook(book, shelf) {
+async function updateBook(book, shelf, props) {
     var result = await update(book, shelf)
-    console.log("result", result)
+
+    console.log("result", props)
+    if (shelf == "currentlyReading") {
+        props.setCurrentlyReading([...props.currentlyReading, book])
+    } else if (shelf == "wantToRead") {
+        props.setWantToRead([...props.wantToRead, book])
+    } else if (shelf == "read") {
+        props.setRead([...props.read, book])
+    }
+
   }
 
 export default Book;

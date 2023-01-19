@@ -25,7 +25,7 @@ function SearchPage(props) {
             {
                 (Object.keys(books).map((key,index) => 
                   (
-                    <Book key={index} book={books[key]} {...props} isUpdate={false} isSearchPage={true} selectedOptionForBook={bookIsOnShelf(props, books[key])} />
+                    <Book key={index} book={books[key]} {...props} isUpdate={false} isSearchPage={true}  />
                   )
                 ))
             }  
@@ -34,6 +34,7 @@ function SearchPage(props) {
       </div>
   );
 }
+//selectedOptionForBook={bookIsOnShelf(props, books[key])}
 
 
 

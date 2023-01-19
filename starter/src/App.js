@@ -11,7 +11,6 @@ export default function App2(props) {
     let [currentlyReading, setCurrentlyReading] = useState([])
     let [wantToRead, setWantToRead] = useState([])
     let [read, setRead] = useState([])
-    let [loadedInitialShelf, setLoadedInitialShelf] = useState(true)
 
 
     useEffect(() => {
@@ -52,8 +51,6 @@ export default function App2(props) {
                 <Route path="search" element={
 
                   <SearchPage 
-                    updateLists={updateLists}
-                    moveListOnShelf={moveListOnShelf}
                     setCurrentlyReading={setCurrentlyReading}
                     setWantToRead={setWantToRead}
                     setRead={setRead}
@@ -66,15 +63,12 @@ export default function App2(props) {
               </Route>
               <Route index element={
                 <Shelf 
-                  moveListOnShelf={moveListOnShelf}
                   setCurrentlyReading={setCurrentlyReading}
                   setWantToRead={setWantToRead}
                   setRead={setRead}
                   currentlyReading={currentlyReading}
                   wantToRead={wantToRead}
                   read={read}
-                  loadedInitialShelf={loadedInitialShelf}
-                  setLoadedInitialShelf={setLoadedInitialShelf}
                   {...props} />
                 } />
             </Routes>
@@ -85,20 +79,3 @@ export default function App2(props) {
     )
 
 }
-
-async function updateLists(bookId, list, setCurrentlyReading, setWantToRead, setRead, currentlyReading, wantToRead, read) {
-    var book = await get(bookId);
-    if (list == "currentlyReading"){
-        currentlyReading.push(book)
-        setCurrentlyReading(currentlyReading)
-    } else if (list == "wantToRead") {
-        var list1 = wantToRead.push(book)
-        setWantToRead(wantToRead)
-    } else if (list == "read") {
-        var list1 = read.push(book)
-        setRead(read)
-    }
-}
-
-
-

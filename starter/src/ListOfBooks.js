@@ -3,13 +3,7 @@ import { useState, useEffect } from 'react';
 import Book from './Book.js';
 
 function ListOfBooks(props) {
-    let [allBooks, setBooks] = useState(props?.books);
-
-    if (props.currentList == "wantToRead") { //props.isUpdate && 
-        //console.log("is want to read list on update")
-        //console.log(props.books)
-    }
-
+    console.log("list of books", props.books)
     return (
         
     <ol className="books-grid">
