@@ -1,7 +1,7 @@
 import { getAll } from "./BooksAPI.js";
 import { useState, useEffect } from 'react';
 import Book from './Book.js';
-import { search } from './BooksAPI.js'
+import { search, update } from './BooksAPI.js'
 import { Link } from "react-router-dom";
 
 
@@ -16,7 +16,7 @@ function SearchPage(props) {
             <input
               type="text"
               placeholder="Search by title, author, or ISBN"
-              onChange={(e) => { handleSearchResult(e.target.value, setBooks) }}
+              onChange={(e) => { handleSearchResult(e.target.value, setBooks);}}
             />
           </div>
         </div>
@@ -25,7 +25,7 @@ function SearchPage(props) {
             {
                 (Object.keys(books).map((key,index) => 
                   (
-                    <Book key={index} book={books[key]} {...props} isUpdate={false} isSearchPage={true} selectedOptionForBook={bookIsOnShelf(props, books[key])} />
+                    <Book key={index} book={books[key]} {...props} selectedOptionForBook={bookIsOnShelf(props, books[key])}  />
                   )
                 ))
             }  
@@ -34,15 +34,8 @@ function SearchPage(props) {
       </div>
   );
 }
+//selectedOptionForBook={bookIsOnShelf(props, books[key])}
 
-async function handleSearchResult(inputValue, setBooks){
-  if( inputValue == undefined || inputValue == "") {
-    setBooks({})
-    return
-  }
-  let result = await search(inputValue, 100)
-  setBooks(result)
-}
 
 function bookIsOnShelf(props, currentBook) {
   var isInCurrentlyReadingList = null;
@@ -72,5 +65,15 @@ function bookIsOnShelf(props, currentBook) {
   return shelf
 }
 
+
+
+async function handleSearchResult(inputValue, setBooks){
+  if( inputValue == undefined || inputValue == "") {
+    setBooks({})
+    return
+  }
+  let result = await search(inputValue, 100)
+  setBooks(result)
+}
 
 export default SearchPage;

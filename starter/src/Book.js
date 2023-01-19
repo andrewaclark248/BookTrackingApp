@@ -1,6 +1,9 @@
+import { update } from './BooksAPI.js'
+
+
 function Book(props) {
     var selectedValue = null;
-    if (props.currentList != undefined) {
+    if (props.currentList != undefined) { //from home pageono
         selectedValue = props.currentList;
     } else if (props.selectedOptionForBook != undefined) {
         selectedValue = props.selectedOptionForBook;
@@ -27,7 +30,7 @@ function Book(props) {
                 <div className="book-shelf-changer">
                 <select value={selectedValue} onChange={(event) => { 
                     if ((event.target.value != "none")) {
-                        props.moveListOnShelf(props.book.id, selectedValue, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
+                        updateBook(props.book, event.target.value, props, selectedValue)
                     }
                 }}>
                     <option value="currentlyReading">
@@ -47,5 +50,18 @@ function Book(props) {
 
 }
 
+async function updateBook(book, newShelf, props, currentShelf) {
+    var result = await update(book, newShelf)
+
+    //add to new shelf
+    if (newShelf == "currentlyReading") {
+        props.setCurrentlyReading([...props.currentlyReading, book])
+    } else if (newShelf == "wantToRead") {
+        props.setWantToRead([...props.wantToRead, book])
+    } else if (newShelf == "read") {
+        props.setRead([...props.read, book])
+    }
+    props.setUpdateBooks(!props.updateBooks)
+}
 
 export default Book;

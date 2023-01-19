@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 
 export default function Shelf(props) {
-    console.log(props.wantToRead)
 
     return (
         <div className="list-books">
@@ -17,18 +16,18 @@ export default function Shelf(props) {
                 <h2 className="bookshelf-title">Currently Reading</h2>
                 <div className="bookshelf-books">
                     <ol className="books-grid">
-                    <ListOfBooks 
-                        currentList="currentlyReading"
-                        books={props.currentlyReading}
-                        setCurrentlyReading={props.setCurrentlyReading}
-                        setWantToRead={props.setWantToRead}
-                        setRead={props.setRead}
-                        isUpdate={true}
-                        moveListOnShelf={moveListOnShelf}
-                        currentlyReading={props.currentlyReading}
-                        wantToRead={props.wantToRead}
-                        read={props.read}
-                    /> 
+                        <ListOfBooks 
+                            currentList="currentlyReading"
+                            books={props.currentlyReading}
+                            setCurrentlyReading={props.setCurrentlyReading}
+                            setWantToRead={props.setWantToRead}
+                            setRead={props.setRead}
+                            currentlyReading={props.currentlyReading}
+                            wantToRead={props.wantToRead}
+                            read={props.read}
+                            setUpdateBooks={props.setUpdateBooks}
+                            updateBooks={props.updateBooks}
+                        /> 
                     </ol>
                 </div>
                 </div>
@@ -36,17 +35,17 @@ export default function Shelf(props) {
                 <h2 className="bookshelf-title">Want to Read</h2>
                 <div className="bookshelf-books">
                     <ol className="books-grid">
-                    <ListOfBooks 
+                        <ListOfBooks 
                             currentList="wantToRead"
                             books={props.wantToRead}
                             setCurrentlyReading={props.setCurrentlyReading}
                             setWantToRead={props.setWantToRead}
                             setRead={props.setRead}
-                            isUpdate={true}
-                            moveListOnShelf={moveListOnShelf}
                             currentlyReading={props.currentlyReading}
                             wantToRead={props.wantToRead}
                             read={props.read}
+                            setUpdateBooks={props.setUpdateBooks}
+                            updateBooks={props.updateBooks}
                         /> 
                     </ol>
                 </div>
@@ -55,17 +54,18 @@ export default function Shelf(props) {
                 <h2 className="bookshelf-title">Read</h2>
                 <div className="bookshelf-books">
                     <ol className="books-grid">
-                    <ListOfBooks 
+                        <ListOfBooks 
                             currentList="read"
                             books={props.read}
                             setCurrentlyReading={props.setCurrentlyReading}
                             setWantToRead={props.setWantToRead}
                             setRead={props.setRead}
-                            isUpdate={true}
-                            moveListOnShelf={moveListOnShelf}
                             currentlyReading={props.currentlyReading}
                             wantToRead={props.wantToRead}
                             read={props.read}
+                            setUpdateBooks={props.setUpdateBooks}
+                            updateBooks={props.updateBooks}
+
                         /> 
                     </ol>
                 </div>
