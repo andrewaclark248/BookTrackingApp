@@ -1,7 +1,7 @@
 import { getAll } from "./BooksAPI.js";
 import { useState, useEffect } from 'react';
 import Book from './Book.js';
-import { search } from './BooksAPI.js'
+import { search, update } from './BooksAPI.js'
 import { Link } from "react-router-dom";
 
 
@@ -16,7 +16,7 @@ function SearchPage(props) {
             <input
               type="text"
               placeholder="Search by title, author, or ISBN"
-              onChange={(e) => { handleSearchResult(e.target.value, setBooks) }}
+              onChange={(e) => { handleSearchResult(e.target.value, setBooks);}}
             />
           </div>
         </div>
@@ -34,6 +34,9 @@ function SearchPage(props) {
       </div>
   );
 }
+
+
+
 
 async function handleSearchResult(inputValue, setBooks){
   if( inputValue == undefined || inputValue == "") {

@@ -1,11 +1,31 @@
 import { moveListOnShelf } from './UpdateBook.js'
 import ListOfBooks from './ListOfBooks.js';
 import { Link } from "react-router-dom";
+import { getAll, update, search } from "./BooksAPI.js"
+import { useState, useEffect } from 'react'
 
 
 export default function Shelf(props) {
-    console.log(props.wantToRead)
 
+    useEffect(() => {
+
+        async function loadBookShelf() {
+            var result = await getAll()
+            var searchResult = await search("ba")
+            var book = searchResult[0]
+            book.shelf = "wantToRead"
+            var x = await update(book, "wantToRead")
+            var updatedlist = await getAll()
+
+        }
+
+        if (props.loadedInitialShelf) {
+            props.setLoadedInitialShelf(false)
+            loadBookShelf()
+
+        }
+    })
+    
     return (
         <div className="list-books">
             <div className="list-books-title">
