@@ -3,7 +3,8 @@ import { update } from './BooksAPI.js'
 
 function Book(props) {
     var selectedValue = null;
-    if (props.currentList != undefined) {
+    console.log("currentList = " + props.currentList)
+    if (props.currentList != undefined) { //from home pageono
         selectedValue = props.currentList;
     } else if (props.selectedOptionForBook != undefined) {
         selectedValue = props.selectedOptionForBook;
@@ -30,10 +31,7 @@ function Book(props) {
                 <div className="book-shelf-changer">
                 <select value={selectedValue} onChange={(event) => { 
                     if ((event.target.value != "none")) {
-                        //console.log("props.book", props.book)
-                        //console.log("shelf", event.target.value)
                         updateBook(props.book, event.target.value, props)
-                        //props.moveListOnShelf(props.book.id, selectedValue, event.target.value, props.setCurrentlyReading, props.setWantToRead, props.setRead, props.currentlyReading, props.wantToRead, props.read)
                     }
                 }}>
                     <option value="currentlyReading">

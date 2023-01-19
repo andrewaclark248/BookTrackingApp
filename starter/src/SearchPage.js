@@ -25,7 +25,7 @@ function SearchPage(props) {
             {
                 (Object.keys(books).map((key,index) => 
                   (
-                    <Book key={index} book={books[key]} {...props} isUpdate={false} isSearchPage={true}  />
+                    <Book key={index} book={books[key]} {...props} selectedOptionForBook={bookIsOnShelf(props, books[key])}  />
                   )
                 ))
             }  
@@ -36,17 +36,6 @@ function SearchPage(props) {
 }
 //selectedOptionForBook={bookIsOnShelf(props, books[key])}
 
-
-
-
-async function handleSearchResult(inputValue, setBooks){
-  if( inputValue == undefined || inputValue == "") {
-    setBooks({})
-    return
-  }
-  let result = await search(inputValue, 100)
-  setBooks(result)
-}
 
 function bookIsOnShelf(props, currentBook) {
   var isInCurrentlyReadingList = null;
@@ -76,5 +65,15 @@ function bookIsOnShelf(props, currentBook) {
   return shelf
 }
 
+
+
+async function handleSearchResult(inputValue, setBooks){
+  if( inputValue == undefined || inputValue == "") {
+    setBooks({})
+    return
+  }
+  let result = await search(inputValue, 100)
+  setBooks(result)
+}
 
 export default SearchPage;
