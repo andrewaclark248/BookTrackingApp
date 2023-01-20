@@ -73,7 +73,11 @@ async function handleSearchResult(inputValue, setBooks){
     return
   }
   let result = await search(inputValue, 100)
-  setBooks(result)
+  if (result.error =="empty query") {
+    setBooks({})
+  } else {
+    setBooks(result)
+  }
 }
 
 export default SearchPage;
